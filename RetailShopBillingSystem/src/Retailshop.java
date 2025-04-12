@@ -25,7 +25,7 @@ class CartItem {
         this.quantity = quantity;
     }
 
-    public double getTotal() {
+    public double get_total() {
         return product.price * quantity;
     }
 }
@@ -34,42 +34,33 @@ class RetailSystem {
     private final List<Product> products = new ArrayList<>();
     private final List<CartItem> cart = new ArrayList<>();
 
-    public void loadFromCSV(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    public void load_from_csv(String file_path) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file_path))) {
             String line;
-            reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.isEmpty())
-                    continue;
-
-                String[] data = line.split(","); // කොමාව (,) බෙදුම්කරුවෙකු ලෙස භාවිතා කර වත්මන් පේළිය String ('data') බෙදයි
-                if (data.length != 3)
-                    continue;
-
-
-                try {
-                    int id = Integer.parseInt(data[0].trim());
-                    String name = data[1].trim();
-                    double price = Double.parseDouble(data[2].trim());
-                    products.add(new Product(id, name, price));
-                } catch (NumberFormatException e) {
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 3) {
+                    try {
+                        int id = Integer.parseInt(data[0].trim());
+                        String name = data[1].trim();
+                        double price = Double.parseDouble(data[2].trim());
+                        add_product(id, name, price);
+                    } catch (NumberFormatException e) {
+                        // Skip lines that don't match expected format
+                    }
                 }
             }
         } catch (IOException e) {
-            System.out.println("Unable to read the Database: " + e.getMessage());
+            System.out.println("Unable to read the database: " + e.getMessage());
         }
     }
 
-    // Function 1: Add a product to the inventory
-    public void addProduct(int id, String name, double price) {
+    public void add_product(int id, String name, double price) {
         Product product = new Product(id, name, price);
         products.add(product);
     }
 
-    // Function 2: Show available products
-    public void showProducts() {
+    public void show_products() {
         if (products.isEmpty()) {
             System.out.println("No products available.");
             return;
@@ -82,9 +73,8 @@ class RetailSystem {
         }
     }
 
-    // Function 3: Add a product to the shopping cart
-    public void addItemToCart(int id, int quantity) {
-        Product product = getProductById(id);
+    public void add_item_to_cart(int id, int quantity) {
+        Product product = get_product_by_id(id);
         if (product != null && quantity > 0) {
             cart.add(new CartItem(product, quantity));
             System.out.println("Added " + quantity + " x " + product.name + " to the cart.");
@@ -93,17 +83,15 @@ class RetailSystem {
         }
     }
 
-    // Function 4: Calculate total amount for items in the cart
-    public double calculateTotal() {
+    public double calculate_total() {
         double total = 0;
         for (CartItem item : cart) {
-            total += item.getTotal();
+            total += item.get_total();
         }
         return total;
     }
 
-    // Function 5: Generate and display the bill
-    public void generateBill() {
+    public void generate_bill() {
         if (cart.isEmpty()) {
             System.out.println("Your cart is empty. No bill to generate.");
             return;
@@ -112,23 +100,21 @@ class RetailSystem {
         System.out.println("\nBill Summary:");
         System.out.printf("%-25s %-10s %-10s\n", "Item", "Qty", "Total");
         for (CartItem item : cart) {
-            System.out.printf("%-25s %-10d %.2f\n", item.product.name, item.quantity, item.getTotal());
+            System.out.printf("%-25s %-10d %.2f\n", item.product.name, item.quantity, item.get_total());
         }
 
-        double totalAmount = calculateTotal();
+        double total_amount = calculate_total();
         System.out.println("--------------------------------------");
-        System.out.printf("Total Amount: %.2f\n", totalAmount);
+        System.out.printf("Total Amount: Rs. %.2f\n", total_amount);
     }
 
-    // Function 6: Clear the shopping cart
-    public void clearCart() {
+    public void clear_cart() {
         cart.clear();
         System.out.println("Shopping cart has been cleared.");
     }
 
-    // Function 7: Find a product by ID
-    public void findProductById(int id) {
-        Product product = getProductById(id);
+    public void find_product_by_id(int id) {
+        Product product = get_product_by_id(id);
         if (product != null) {
             System.out.printf("\nFound Product: ID = %d, Name = %s, Price = %.2f\n", product.id, product.name, product.price);
         } else {
@@ -136,8 +122,7 @@ class RetailSystem {
         }
     }
 
-    // Helper function to get a product by ID
-    private Product getProductById(int id) {
+    private Product get_product_by_id(int id) {
         for (Product p : products) {
             if (p.id == id) {
                 return p;
@@ -146,45 +131,31 @@ class RetailSystem {
         return null;
     }
 
-
     public static class RetailShop {
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
-            RetailSystem retailSystem = new RetailSystem();
+            RetailSystem retail_system = new RetailSystem();
 
-            Path source = Paths.get("database.csv");
-            Path target = Paths.get(System.getProperty("user.dir"), "database.csv");
+            Path csv_path = Paths.get(System.getProperty("user.dir"), "database.csv");
+            retail_system.load_from_csv(csv_path.toString());
 
-            try {
-                if (!Files.exists(target)) {
-                    Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("Database copied to working directory.");
-                } else {
-                    System.out.println("Database Integration Complete");
-                }
-            } catch (IOException e) {
-                System.out.println("Database copying failed: " + e.getMessage());
-            }
-
-            retailSystem.loadFromCSV(String.valueOf(target));
-            retailSystem.showProducts();
-
-            // Authentication section
-            System.out.println("Welcome to the Retail System!");
+            System.out.println("Welcome to Retail Shop Billing System");
             System.out.print("Enter username: ");
             String username = scanner.nextLine();
             System.out.print("Enter password: ");
             String password = scanner.nextLine();
 
-            // Simple Authentication check (you can expand this to a more complex system)
-            if (!authenticate(username, password)) {
-                System.out.println("Invalid username or password.");
-                return; // End the program if authentication fails
+            while (!authenticate(username, password)) {
+                System.out.println("Invalid username or password. Please try again.");
+                System.out.print("Enter username: ");
+                username = scanner.nextLine();
+                System.out.print("Enter password: ");
+                password = scanner.nextLine();
             }
+            System.out.println("Login successful! Welcome, " + username + "!");
 
-            // User interaction after authentication
             while (true) {
-                System.out.println("\n--- Retail Shop System ---");
+                System.out.println("\n--- Retail Billing System Menu ---");
                 System.out.println("1. Show Products");
                 System.out.println("2. Add Product to Cart");
                 System.out.println("3. Generate Bill");
@@ -196,7 +167,7 @@ class RetailSystem {
 
                 switch (choice) {
                     case 1:
-                        retailSystem.showProducts();
+                        retail_system.show_products();
                         break;
 
                     case 2:
@@ -204,25 +175,25 @@ class RetailSystem {
                         int id = scanner.nextInt();
                         System.out.print("Enter Quantity: ");
                         int quantity = scanner.nextInt();
-                        retailSystem.addItemToCart(id, quantity);
+                        retail_system.add_item_to_cart(id, quantity);
                         break;
 
                     case 3:
-                        retailSystem.generateBill();
+                        retail_system.generate_bill();
                         break;
 
                     case 4:
-                        retailSystem.clearCart();
+                        retail_system.clear_cart();
                         break;
 
                     case 5:
                         System.out.print("Enter Product ID to find: ");
-                        int searchId = scanner.nextInt();
-                        retailSystem.findProductById(searchId);
+                        int search_id = scanner.nextInt();
+                        retail_system.find_product_by_id(search_id);
                         break;
 
                     case 6:
-                        System.out.println("Thank you for shopping! Goodbye.");
+                        System.out.println("Transaction complete, Thank you for shopping! Goodbye.");
                         scanner.close();
                         return;
 
@@ -233,12 +204,10 @@ class RetailSystem {
             }
         }
 
-        // Simple authentication method
         private static boolean authenticate(String username, String password) {
-            // Here you can implement more complex authentication logic or use a database
-            String validUsername = "admin";
-            String validPassword = "admin";
-            return username.equals(validUsername) && password.equals(validPassword);
+            String valid_username = "admin";
+            String valid_password = "admin";
+            return username.equals(valid_username) && password.equals(valid_password);
         }
     }
-}
+}                                                                               
