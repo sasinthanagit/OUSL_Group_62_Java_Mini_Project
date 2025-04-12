@@ -163,9 +163,9 @@ class RetailSystem {
                 System.out.println("5. Find Product by ID");
                 System.out.println("6. Exit");
                 System.out.print("Enter your choice: ");
-                int choice = scanner.nextInt();
+                int opt = scanner.nextInt();
 
-                switch (choice) {
+                switch (opt) {
                     case 1:
                         retail_system.show_products();
                         break;
