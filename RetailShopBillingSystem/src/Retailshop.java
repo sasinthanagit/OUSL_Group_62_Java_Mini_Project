@@ -54,7 +54,7 @@ class RetailSystem {
             System.out.println("Unable to read the database: " + e.getMessage());
         }
     }
-
+// Function 1: Add a product to the inventory
     public void add_product(int id, String name, double price) {
         Product product = new Product(id, name, price);
         products.add(product);
