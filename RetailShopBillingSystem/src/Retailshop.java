@@ -59,7 +59,7 @@ class RetailSystem {
         Product product = new Product(id, name, price);
         products.add(product);
     }
-
+  // Function 2: Show available products
     public void show_products() {
         if (products.isEmpty()) {
             System.out.println("No products available.");
@@ -72,7 +72,7 @@ class RetailSystem {
             System.out.printf("%-5d %-25s %-10.2f\n", p.id, p.name, p.price);
         }
     }
-
+// Function 3: Add a product to the shopping cart
     public void add_item_to_cart(int id, int quantity) {
         Product product = get_product_by_id(id);
         if (product != null && quantity > 0) {
@@ -82,7 +82,7 @@ class RetailSystem {
             System.out.println("Invalid product ID or quantity.");
         }
     }
-
+    // Function 4: Calculate total amount for items in the cart
     public double calculate_total() {
         double total = 0;
         for (CartItem item : cart) {
@@ -90,7 +90,7 @@ class RetailSystem {
         }
         return total;
     }
-
+   // Function 5: Generate and display the bill
     public void generate_bill() {
         if (cart.isEmpty()) {
             System.out.println("Your cart is empty. No bill to generate.");
@@ -107,7 +107,7 @@ class RetailSystem {
         System.out.println("--------------------------------------");
         System.out.printf("Total Amount: Rs. %.2f\n", total_amount);
     }
-
+  // Function 6: Clear the shopping cart
     public void clear_cart() {
         cart.clear();
         System.out.println("Shopping cart has been cleared.");
@@ -121,7 +121,7 @@ class RetailSystem {
             System.out.println("Product not found with ID: " + id);
         }
     }
-
+   // Function 7: Find a product by ID
     private Product get_product_by_id(int id) {
         for (Product p : products) {
             if (p.id == id) {
