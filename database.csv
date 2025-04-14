@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 productId,productName,productPrice
 1,Rice Keeri Samba 1kg,260.0
 2,Sugar 1kg,350.0
@@ -103,4 +104,111 @@ productId,productName,productPrice
 102,Magazine,150.0
 103,Newspaper,60.0
 104,Toy Car,250.0
+=======
+productId,productName,productPrice
+1,Rice Keeri Samba 1kg,260.0
+2,Sugar 1kg,350.0
+3,Wheat Flour (1kg),240.0
+4,Lentils,400.0
+5,100 Tea Bags Pack,700.0
+6,NESCAFÉ Coffee 100g Jar,400.0
+7,Milk Powder 400g,1200.0
+8,Cooking Oil 01 Ltr,1047.0
+9,Salt 500g ,450.0
+10,Chili Powder 100g,120.0
+11,Turmeric Powder,70.0
+12,Cumin Powder,100.0
+13,Coriander Powder,90.0
+14,Mustard Seeds,60.0
+15,Vinegar,140.0
+16,Soy Sauce,170.0
+17,Tomato Sauce,200.0
+18,Chili Sauce,820.0
+19,Jam,580.0
+20,Peanut Butter,1320.0
+21,Bread,150.0
+22,Buns,80.0
+23,String Hoppers,140.0
+24,Hoppers,100.0
+25,Coconut Milk,180.0
+26,Eggs,35.0
+27,Onions,80.0
+28,Potatoes 1kg,190.0
+29,Tomatoes,100.0
+30,Carrots,110.0
+31,Cabbage,60.0
+32,Beans,80.0
+33,Garlic,140.0
+34,Ginger,170.0
+35,Green Chilies,100.0
+36,Lime,40.0
+37,Mango,120.0
+38,Banana,50.0
+39,Papaya,100.0
+40,Pineapple,150.0
+41,Watermelon,180.0
+42,Orange,90.0
+43,Apple,150.0
+44,Grapes,220.0
+45,Avocado,200.0
+46,Biscuits,250.0
+47,Chocolate,80.0
+48,Swiss Rolls,100.0
+49,Soap,150.0
+50,Shampoo,500.0
+51,Toothpaste,300.0
+52,Toothbrush,180.0
+53,Dish Soap,200.0
+54,Sponge,60.0
+55,Toilet Cleaner,220.0
+56,Floor Cleaner,250.0
+57,Air Freshener,280.0
+58,Mosquito Coil,100.0
+59,Dustbin,300.0
+60,Broom,350.0
+61,Mop,450.0
+62,Towel,700.0
+63,Bucket,400.0
+64,Mug,200.0
+65,Spoon,60.0
+66,Fork,60.0
+67,Plate,120.0
+68,Bowl,140.0
+69,Kettle,1300.0
+70,Notebook,100.0
+71,Pen,25.0
+72,Pencil,20.0
+73,Eraser,15.0
+74,Ruler,40.0
+75,Sharpener,30.0
+76,Stapler,180.0
+77,Paper Clips,50.0
+78,Glue Stick,70.0
+79,Scissors,140.0
+80,Extension Cord,400.0
+81,Light Bulb,120.0
+82,Battery,70.0
+83,SuperGlue,600.0
+84,Adhesive Tape,80.0
+85,Packing Tape,120.0
+86,Gift Wrap,140.0
+87,Greeting Card,60.0
+88,Candle,100.0
+89,Matchbox,25.0
+90,Umbrella,600.0
+91,Raincoat,800.0
+92,Shopping Bag,40.0
+93,Water Bottle,180.0
+94,Lunch Box,220.0
+95,Thermos,900.0
+96,Hat,300.0
+97,Socks,120.0
+98,T-Shirt,450.0
+99,Shorts,550.0
+100,Slippers,350.0
+101,Book,400.0
+102,Magazine,150.0
+103,Newspaper,60.0
+104,Toy Car,250.0
+>>>>>>> aae0ba7a22f99ba44b973d6049484124f521d94d
 105,Doll,350.0
