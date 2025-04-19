@@ -154,6 +154,7 @@ class RetailSystem {
             }
             System.out.println("Login successful! Welcome, " + username + "!");
 
+
             while (true) {
                 System.out.println("\n--- Retail Billing System Menu ---");
                 System.out.println("1. Show Products");
@@ -163,43 +164,70 @@ class RetailSystem {
                 System.out.println("5. Find Product by ID");
                 System.out.println("6. Exit");
                 System.out.print("Enter your choice: ");
-                int opt = scanner.nextInt();
 
-                switch (opt) {
-                    case 1:
-                        retail_system.show_products();
-                        break;
+                try {
+                    if (scanner.hasNextInt()) {
+                        int opt = scanner.nextInt();
+                        scanner.nextLine();
 
-                    case 2:
-                        System.out.print("Enter Product ID: ");
-                        int id = scanner.nextInt();
-                        System.out.print("Enter Quantity: ");
-                        int quantity = scanner.nextInt();
-                        retail_system.add_item_to_cart(id, quantity);
-                        break;
+                        switch (opt) {
+                            case 1:
+                                retail_system.show_products();
+                                break;
 
-                    case 3:
-                        retail_system.generate_bill();
-                        break;
+                            case 2:
+                                System.out.print("Enter Product ID: ");
+                                if (scanner.hasNextInt()) {
+                                    int id = scanner.nextInt();
+                                    System.out.print("Enter Quantity: ");
+                                    if (scanner.hasNextInt()) {
+                                        int quantity = scanner.nextInt();
+                                        retail_system.add_item_to_cart(id, quantity);
+                                    } else {
+                                        System.out.println("Invalid quantity. Please enter a number.");
+                                        scanner.nextLine();
+                                    }
+                                } else {
+                                    System.out.println("Invalid product ID. Please enter a number.");
+                                    scanner.nextLine();
+                                }
+                                break;
 
-                    case 4:
-                        retail_system.clear_cart();
-                        break;
+                            case 3:
+                                retail_system.generate_bill();
+                                break;
 
-                    case 5:
-                        System.out.print("Enter Product ID to find: ");
-                        int search_id = scanner.nextInt();
-                        retail_system.find_product_by_id(search_id);
-                        break;
+                            case 4:
+                                retail_system.clear_cart();
+                                break;
 
-                    case 6:
-                        System.out.println("Transaction complete, Thank you for shopping! Goodbye.");
-                        scanner.close();
-                        return;
+                            case 5:
+                                System.out.print("Enter Product ID to find: ");
+                                if (scanner.hasNextInt()) {
+                                    int search_id = scanner.nextInt();
+                                    retail_system.find_product_by_id(search_id);
+                                } else {
+                                    System.out.println("Invalid product ID. Please enter a number.");
+                                    scanner.nextLine();
+                                }
+                                break;
 
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                        break;
+                            case 6:
+                                System.out.println("Transaction complete, Thank you for shopping! Goodbye.");
+                                scanner.close();
+                                return;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+                                break;
+                        }
+                    } else {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scanner.nextLine();
+                    }
+                } catch (Exception e) {
+                    System.out.println("An error occurred. Please try again.");
+                    scanner.nextLine();
                 }
             }
         }
